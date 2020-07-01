@@ -1,5 +1,6 @@
 
-#include "test.h"
+#include "controller.h"
+#include "model.h"
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -13,8 +14,10 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    Test test;
-    engine.rootContext()->setContextProperty(QStringLiteral("test"), &test);
+    Controller test;
+    Model model(test);
+
+    engine.rootContext()->setContextProperty(QStringLiteral("model"), &model);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
@@ -23,7 +26,6 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
-
 
     return app.exec();
 }

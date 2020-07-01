@@ -1,7 +1,7 @@
 import QtQuick 2.12
-import QtQuick.Window 2.0
+import QtQuick.Window 2.12
 
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.12
 
 Window {
     visible: true
@@ -11,7 +11,7 @@ Window {
 
     Label {
         id: time1
-        text: test.testChild.time
+        text: model.time
     }
 
     BusyIndicator {
@@ -19,16 +19,6 @@ Window {
         x: 0
         y: 23
     }
-
-//    RangeSlider {
-//        id: rangeSlider
-//        x: 0
-//        y: 89
-//        width: 640
-//        height: 40
-//        second.value: "0.75"
-//        first.value: "0.25"
-//    }
 
     PathView {
         id: pathView
@@ -96,14 +86,16 @@ Window {
         id: button
         x: 0
         y: 271
-        text: qsTr("Button")
+        text: qsTr("Press me!!")
+        checkable: true
+        onToggled: model.onButtonPress(button.checked)
     }
 
     Label {
         id: label
         x: 106
         y: 294
-        text: button.pressed
+        text: model.boolValue
     }
 
 
